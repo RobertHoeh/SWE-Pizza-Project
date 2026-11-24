@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ui:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ui="UnityEngine.UIElements"
-    xmlns:uie="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    <Style src="project://database/Assets/LogInScreen/LogInScreen.uss?fileID=7433441132597879392&amp;guid=a6ec7aeb908981a46880397a08510c20&amp;type=3#LogInScreen" />
-	<ui:Label text="Hello World! From UXML" />
-	<ui:Label class="custom-label" text="Hello World! With Style" />
-
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="NavBar" src="project://database/Assets/NavBar.uxml?fileID=9197481963319205126&amp;guid=c81377c752c70b24382a7fadb87e21a1&amp;type=3#NavBar"/>
+    <Style src="project://database/Assets/LogInScreen/LogInScreen.uss?fileID=7433441132597879392&amp;guid=a6ec7aeb908981a46880397a08510c20&amp;type=3#LogInScreen"/>
+    <ui:Instance template="NavBar" style="height: 40px; background-color: rgb(221, 56, 246);"/>
+    <ui:Label text="Hello World! From UXML"/>
+    <ui:Label text="Hello World! With Style" class="custom-label"/>
 </ui:UXML>

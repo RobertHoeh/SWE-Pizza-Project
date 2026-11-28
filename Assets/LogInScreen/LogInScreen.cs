@@ -1,30 +1,44 @@
-using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LogInScreen : EditorWindow
+// "Sign in to Access Dashboard" (mockup slides 1, 15-21, 27-29).
+public class LogInScreen : UIScreen
 {
-    [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
-
-    [MenuItem("Window/UI Toolkit/LogInScreen")]
-    public static void ShowExample()
+    protected override void OnBind(VisualElement root)
     {
-        LogInScreen wnd = GetWindow<LogInScreen>();
-        wnd.titleContent = new GUIContent("LogInScreen");
+        root.OnClick("SignInButton", SignIn);
+        root.OnClick("CreateAccountLink", () => UIManager.Instance.Show(ScreenID.REGISTER_CODE));
+        root.OnClick("ForgotPasswordLink", () => UIManager.Instance.Show(ScreenID.FORGOT_PASSWORD));
     }
 
-    public void CreateGUI()
+    protected override void Refresh()
     {
-        // Each editor window contains a root VisualElement object
-        VisualElement root = rootVisualElement;
+        HideCardError();
+        Root.ClearFields("UsernameField", "PasswordField");
+    }
 
-        // VisualElements objects can contain other VisualElement following a tree hierarchy.
-        VisualElement label = new Label("Hello World! From C#");
-        root.Add(label);
+    void SignIn()
+    {
+        var username = Root.FieldText("UsernameField");
+        var password = Root.FieldText("PasswordField");
 
-        // Instantiate UXML
-        VisualElement labelFromUXML = m_VisualTreeAsset.Instantiate();
-        root.Add(labelFromUXML);
+        if (username == "" || password == "")
+        {
+            ShowCardError("Password or username missing");
+            return;
+        }
+
+        // TODO: check the username and password with the backend. On failure use
+        //   ShowCardError("You have entered an incorrect username.") or
+        //   ShowCardError("You have entered an incorrect password.")
+        // Placeholder until then: any username starting with "manager" signs in as a manager.
+        bool isManager = username.ToLower().StartsWith("manager");
+        Session.LogIn(username, isManager);
+        HideCardError();
+
+        UIManager.Instance.Modal<SuccessPopup>().Open(
+            "LOGIN SUCCESSFUL",
+            "You have successfully signed into your account.",
+            "Go to Dashboard",
+            () => UIManager.Instance.Show(ScreenID.ORDER_DASHBOARD));
     }
 }

@@ -5,5 +5,9 @@
     xmlns:uie="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
 >
-    
+    <!-- UIManager loads every page into screens-layer and every popup into modal-layer.
+         The error / success banner goes on top of both. -->
+    <ui:VisualElement name="screens-layer" class="layer"/>
+    <ui:VisualElement name="modal-layer" class="layer" picking-mode="Ignore"/>
+    <ui:VisualElement name="toast-layer" class="layer" picking-mode="Ignore"/>
 </ui:UXML>

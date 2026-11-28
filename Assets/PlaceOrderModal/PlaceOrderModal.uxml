@@ -1,0 +1,341 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        "Place Order" popup (slides 40-76). Everything lives in one modal; code shows one panel at a time
+        by toggling the "hidden" class.
+
+        Steps (stepper at the top; mark the current one with the active step modifier class, see .uss):
+          StepRecordOrder      - tabs: PremadeTab / CustomTab / SidesTab  -> panels PremadePanel / CustomPanel / SidesPanel
+                                 (mark the current tab with the active tab modifier class, see .uss)
+          StepCustomerInfo     - LookupPanel (enter phone) -> FindingPanel (spinner) -> RecordPanel
+                                 RecordPanel: found     -> RecordTitle "Customer Information Found!", show FoundButtons
+                                              not found -> RecordTitle "Customer Information not found" + RecordSubtitle, show CreateRecordButton
+          StepReceipt          - DeliveryPanel -> ReviewPanel -> PlacedPanel
+        NextButton is only shown on StepRecordOrder; BackButton on the other two steps.
+        The order-details list on the right ("OrderItems") holds sample data.
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/PlaceOrderModal/PlaceOrderModal.uss"/>
+    <ui:VisualElement name="PlaceOrderModal" class="modal-overlay">
+        <ui:VisualElement class="modal">
+
+            <!-- ============ stepper ============ -->
+            <ui:VisualElement class="po-stepper">
+                <ui:Label name="StepLabelRecord" text="Record Order" class="po-step po-step--active"/>
+                <ui:VisualElement class="po-step-arrow"><ui:VisualElement class="po-step-arrow__line"/><ui:Label text="►" class="po-step-arrow__head"/></ui:VisualElement>
+                <ui:Label name="StepLabelCustomer" text="Customer Information" class="po-step"/>
+                <ui:VisualElement class="po-step-arrow"><ui:VisualElement class="po-step-arrow__line"/><ui:Label text="►" class="po-step-arrow__head"/></ui:VisualElement>
+                <ui:Label name="StepLabelReceipt" text="Receipt" class="po-step"/>
+            </ui:VisualElement>
+
+            <!-- ============ left side: step content ============ -->
+            <ui:VisualElement class="po-left">
+
+                <!-- ===== STEP 1: Record Order ===== -->
+                <ui:VisualElement name="StepRecordOrder" class="po-fill">
+                    <ui:VisualElement class="po-tabs">
+                        <ui:Button name="PremadeTab" class="po-tab po-tab--active"><ui:Label text="Premade Pizzas" class="po-tab__label"/></ui:Button>
+                        <ui:Button name="CustomTab" class="po-tab"><ui:Label text="Custom Pizzas" class="po-tab__label"/></ui:Button>
+                        <ui:Button name="SidesTab" class="po-tab po-tab--wide"><ui:Label text="Beverages &amp; Sides" class="po-tab__label"/></ui:Button>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="po-tab-panel">
+
+                        <!-- Premade Pizzas (slide 40) -->
+                        <ui:ScrollView name="PremadePanel" horizontal-scroller-visibility="Hidden" class="po-fill">
+                            <ui:VisualElement class="premade">
+                                <ui:VisualElement class="premade__info">
+                                    <ui:Label text="Cheese Pizza" class="po-heading"/>
+                                    <ui:VisualElement class="premade__image"/>
+                                </ui:VisualElement>
+                                <ui:GroupBox class="radio-group premade__sizes">
+                                    <ui:Label text="Size:" class="po-heading"/>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="small" class="choice opt__choice"/><ui:Label text="7$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="medium" class="choice opt__choice"/><ui:Label text="9$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="large" class="choice opt__choice"/><ui:Label text="11$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="extra large" class="choice opt__choice"/><ui:Label text="12$" class="opt__price"/></ui:VisualElement>
+                                </ui:GroupBox>
+                                <ui:VisualElement class="premade__toppings">
+                                    <ui:Label text="Additional Toppings:" class="po-heading"/>
+                                    <ui:VisualElement class="row">
+                                        <ui:VisualElement class="toppings-col">
+                                            <ui:VisualElement class="opt"><ui:Toggle text="extra cheese" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="onion" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="pineapple" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="olives" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="mushroom" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="jalapeno" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                        </ui:VisualElement>
+                                        <ui:VisualElement class="toppings-col toppings-col--second">
+                                            <ui:VisualElement class="opt"><ui:Toggle text="pepperoni" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="premium chicken" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="Italian sausage" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="bacon" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="beef" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                            <ui:Button text="Add to Cart" class="btn btn--purple po-add-to-cart premade__add"/>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+
+                            <ui:VisualElement class="premade">
+                                <ui:VisualElement class="premade__info">
+                                    <ui:Label text="Pepperoni Pizza" class="po-heading"/>
+                                    <ui:VisualElement class="premade__image"/>
+                                </ui:VisualElement>
+                                <ui:GroupBox class="radio-group premade__sizes">
+                                    <ui:Label text="Size:" class="po-heading"/>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="small" class="choice opt__choice"/><ui:Label text="7$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="medium" class="choice opt__choice"/><ui:Label text="9$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="large" class="choice opt__choice"/><ui:Label text="11$" class="opt__price"/></ui:VisualElement>
+                                    <ui:VisualElement class="opt"><ui:RadioButton text="extra large" class="choice opt__choice"/><ui:Label text="12$" class="opt__price"/></ui:VisualElement>
+                                </ui:GroupBox>
+                                <ui:VisualElement class="premade__toppings">
+                                    <ui:Label text="Additional Toppings:" class="po-heading"/>
+                                    <ui:VisualElement class="row">
+                                        <ui:VisualElement class="toppings-col">
+                                            <ui:VisualElement class="opt"><ui:Toggle text="extra cheese" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="onion" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="pineapple" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="olives" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="mushroom" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="jalapeno" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                        </ui:VisualElement>
+                                        <ui:VisualElement class="toppings-col toppings-col--second">
+                                            <ui:VisualElement class="opt"><ui:Toggle text="pepperoni" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="premium chicken" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="Italian sausage" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="bacon" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                            <ui:VisualElement class="opt"><ui:Toggle text="beef" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                            <ui:Button text="Add to Cart" class="btn btn--purple po-add-to-cart premade__add"/>
+                                        </ui:VisualElement>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:ScrollView>
+
+                        <!-- Custom Pizzas (slide 44) -->
+                        <ui:VisualElement name="CustomPanel" class="po-fill custom hidden">
+                            <ui:GroupBox name="CrustGroup" class="radio-group custom__section">
+                                <ui:Label text="Crust:" class="custom__heading"/>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="thin" class="choice opt__choice"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="regular" class="choice opt__choice"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="pan" class="choice opt__choice"/></ui:VisualElement>
+                            </ui:GroupBox>
+                            <ui:GroupBox name="SizeGroup" class="radio-group custom__section">
+                                <ui:Label text="Size:" class="custom__heading"/>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="small" class="choice opt__choice"/><ui:Label text="7$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="medium" class="choice opt__choice"/><ui:Label text="9$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="large" class="choice opt__choice"/><ui:Label text="11$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="extra large" class="choice opt__choice"/><ui:Label text="12$" class="opt__price"/></ui:VisualElement>
+                            </ui:GroupBox>
+                            <ui:GroupBox name="SauceGroup" class="radio-group custom__section">
+                                <ui:Label text="Sauce" class="custom__heading"/>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="marinara" class="choice opt__choice"/></ui:VisualElement>
+                                <ui:VisualElement class="opt custom__opt"><ui:RadioButton text="alfredo" class="choice opt__choice"/></ui:VisualElement>
+                            </ui:GroupBox>
+                            <ui:VisualElement class="custom__section">
+                                <ui:Label text="Additional Toppings:" class="custom__heading"/>
+                                <ui:VisualElement class="row">
+                                    <ui:VisualElement class="toppings-col custom__toppings-col">
+                                        <ui:VisualElement class="opt"><ui:Toggle text="cheese" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="onion" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="pineapple" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="olives" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="mushroom" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="jalapeno" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement class="toppings-col custom__toppings-col">
+                                        <ui:VisualElement class="opt"><ui:Toggle text="pepperoni" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="premium chicken" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="Italian sausage" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="bacon" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                        <ui:VisualElement class="opt"><ui:Toggle text="beef" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:Button name="CustomAddToCartButton" text="Add to Cart" class="btn btn--purple po-add-to-cart po-add-to-cart--corner"/>
+                        </ui:VisualElement>
+
+                        <!-- Beverages & Sides (slide 52) -->
+                        <ui:VisualElement name="SidesPanel" class="po-fill sides hidden">
+                            <ui:GroupBox name="BeverageGroup" class="radio-group">
+                                <ui:Label text="Beverages:" class="sides__heading"/>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Coke" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Sprite" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Pepsi" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Hi-C" class="choice opt__choice"/><ui:Label text="1$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Lemonaid" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                            </ui:GroupBox>
+                            <ui:GroupBox name="SideGroup" class="radio-group sides__group">
+                                <ui:Label text="Sides:" class="sides__heading"/>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Vegan Salad" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Bread Sticks" class="choice opt__choice"/><ui:Label text="2$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="Beef Jerky" class="choice opt__choice"/><ui:Label text="4$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="4-Piece Chicken Wings" class="choice opt__choice"/><ui:Label text="7$" class="opt__price"/></ui:VisualElement>
+                                <ui:VisualElement class="opt sides__opt"><ui:RadioButton text="French Fries" class="choice opt__choice"/><ui:Label text="3$" class="opt__price"/></ui:VisualElement>
+                            </ui:GroupBox>
+                            <ui:Button name="SidesAddToCartButton" text="Add to Cart" class="btn btn--purple po-add-to-cart po-add-to-cart--corner"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- ===== STEP 2: Customer Information ===== -->
+                <ui:VisualElement name="StepCustomerInfo" class="po-fill hidden">
+
+                    <!-- enter phone number (slide 57) -->
+                    <ui:VisualElement name="LookupPanel" class="po-panel">
+                        <ui:Label text="Customer Information" class="po-title po-lookup__title"/>
+                        <ui:VisualElement class="info-table po-table po-lookup__table">
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Customer Phone Number:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:TextField name="LookupPhoneField" placeholder-text="XXX-XXX-XXXX" class="cell-input"/></ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:Button name="FindCustomerButton" text="Find Customer Record" class="btn btn--purple btn--xs po-lookup__find"/>
+                    </ui:VisualElement>
+
+                    <!-- searching (slide 62) -->
+                    <ui:VisualElement name="FindingPanel" class="po-panel hidden">
+                        <ui:Label text="Finding Customer Information" class="po-title po-finding__title"/>
+                        <ui:VisualElement class="po-spinner"/>
+                    </ui:VisualElement>
+
+                    <!-- found (slide 63) / not found (slide 64) -->
+                    <ui:VisualElement name="RecordPanel" class="po-panel hidden">
+                        <ui:Label name="RecordTitle" text="Customer Information Found!" class="po-title po-record__title"/>
+                        <ui:Label name="RecordSubtitle" text="Create customer record" class="po-title hidden"/>
+                        <ui:VisualElement class="info-table po-table po-record__table">
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Customer Phone Number:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:TextField name="RecordPhoneField" value="770-362-3213" placeholder-text="XXX-XXX-XXXX" class="cell-input"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Name:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:TextField name="RecordNameField" value="John Something" placeholder-text="Customer’s name" class="cell-input"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row po-table__row--tall">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Address:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:TextField name="RecordAddressField" multiline="true" value="32 Charlotte Ave.&#10;Marietta GA" placeholder-text="Customer’s Address" class="cell-input"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Apt Num:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:TextField name="RecordAptField" placeholder-text="Leave empty if none" class="cell-input"/></ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="FoundButtons" class="po-record__buttons">
+                            <ui:Button name="UpdateCustomerButton" text="Update Customer Record" class="btn btn--purple po-small-btn po-small-btn--wide"/>
+                            <ui:Button name="UseThisInfoButton" text="Use this info" class="btn btn--purple po-small-btn po-record__use"/>
+                        </ui:VisualElement>
+                        <ui:Button name="CreateRecordButton" text="Create Record" class="btn btn--purple po-small-btn po-record__create hidden"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- ===== STEP 3: Receipt ===== -->
+                <ui:VisualElement name="StepReceipt" class="po-fill hidden">
+
+                    <!-- delivery method (slides 69-72) -->
+                    <ui:VisualElement name="DeliveryPanel" class="po-panel">
+                        <ui:Label text="Receipt Delivery Method" class="po-title po-delivery__title"/>
+                        <ui:VisualElement class="po-delivery__options">
+                            <ui:VisualElement class="opt po-delivery__opt"><ui:Toggle name="PhysicalToggle" text="Physical" class="choice choice--pink po-delivery__choice"/></ui:VisualElement>
+                            <ui:VisualElement class="opt po-delivery__opt"><ui:Toggle name="TextToggle" text="Text" class="choice choice--pink po-delivery__choice"/><ui:TextField name="ReceiptPhoneField" placeholder-text="770-362-3213" class="outline-input"/></ui:VisualElement>
+                            <ui:VisualElement class="opt po-delivery__opt"><ui:Toggle name="EmailToggle" text="Email" class="choice choice--pink po-delivery__choice"/><ui:TextField name="ReceiptEmailField" placeholder-text="Email Address" class="outline-input"/></ui:VisualElement>
+                            <ui:VisualElement class="opt po-delivery__opt po-delivery__opt--delivery">
+                                <ui:Toggle name="DeliveryToggle" text="Delivery (Leave Empty if Customer Pick up)" class="choice choice--pink po-delivery__choice"/>
+                                <ui:Label text="4$" class="po-delivery__fee"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:Button name="ReviewOrderButton" text="Review Order" class="btn btn--purple po-small-btn po-delivery__review"/>
+                    </ui:VisualElement>
+
+                    <!-- review (slide 73) -->
+                    <ui:VisualElement name="ReviewPanel" class="po-panel hidden">
+                        <ui:Label text="Review Order" class="po-title po-review__title"/>
+                        <ui:VisualElement class="info-table po-table po-review__table">
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Customer Phone Number:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:Label name="ReviewPhone" text="770-362-3213" class="info-table__value-text"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Name:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:Label name="ReviewName" text="John Something" class="info-table__value-text"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row po-table__row--tall">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Address:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:Label name="ReviewAddress" text="32 Charlotte Ave.&#10;Marietta GA" class="info-table__value-text"/></ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="info-table__row po-table__row">
+                                <ui:VisualElement class="info-table__key"><ui:Label text="Apt Num:" class="info-table__key-text"/></ui:VisualElement>
+                                <ui:VisualElement class="info-table__value"><ui:Label name="ReviewApt" text="Leave empty if none" class="info-table__value-text info-table__placeholder"/></ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:Label text="Approximate Wait Time:" class="po-title po-review__wait-label"/>
+                        <ui:Label name="ReviewWaitTime" text="60 mins" class="po-text"/>
+                        <ui:Button name="PlaceOrderButton" text="Place Order" class="btn btn--green btn--outlined po-small-btn po-review__place"/>
+                    </ui:VisualElement>
+
+                    <!-- placed (slide 76) -->
+                    <ui:VisualElement name="PlacedPanel" class="po-panel hidden">
+                        <ui:Label text="Order Placed Successfully!" class="po-title po-placed__title"/>
+                        <ui:Label text="Approximate Wait Time:" class="po-title po-placed__wait-label"/>
+                        <ui:Label name="PlacedWaitTime" text="30 mins" class="po-text"/>
+                        <ui:VisualElement class="po-placed__buttons">
+                            <ui:Button name="CancelOrderButton" text="Cancel Order" class="btn btn--lavender btn--outlined po-small-btn po-placed__btn"/>
+                            <ui:Button name="OkButton" text="Ok" class="btn btn--green btn--outlined po-small-btn po-placed__btn po-placed__ok"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- ============ right side: order summary ============ -->
+            <ui:VisualElement class="po-divider"/>
+            <ui:VisualElement class="po-details">
+                <ui:Label text="Order Details:" class="po-details__title"/>
+                <ui:ScrollView name="OrderItems" horizontal-scroller-visibility="Hidden" class="po-details__items">
+                    <ui:VisualElement class="po-item">
+                        <ui:VisualElement class="po-item__head">
+                            <ui:Label text="Cheese Pizza" class="po-item__name"/>
+                            <ui:VisualElement class="po-qty">
+                                <ui:Button text="-" class="po-qty__btn"/>
+                                <ui:Label text="1" class="po-qty__count"/>
+                                <ui:Button text="+" class="po-qty__btn"/>
+                            </ui:VisualElement>
+                            <ui:Label text="16$" class="po-item__price"/>
+                        </ui:VisualElement>
+                        <ui:Label text="•        Medium size" class="po-item__detail"/>
+                        <ui:Label text="•        Olives" class="po-item__detail"/>
+                        <ui:Label text="•        Pineapple" class="po-item__detail"/>
+                        <ui:Label text="•        Beef" class="po-item__detail"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="po-item">
+                        <ui:VisualElement class="po-item__head">
+                            <ui:Label text="Custom Pizza" class="po-item__name"/>
+                            <ui:VisualElement class="po-qty">
+                                <ui:Button text="-" class="po-qty__btn"/>
+                                <ui:Label text="1" class="po-qty__count"/>
+                                <ui:Button text="+" class="po-qty__btn"/>
+                            </ui:VisualElement>
+                            <ui:Label text="9$" class="po-item__price"/>
+                        </ui:VisualElement>
+                        <ui:Label text="•        Thin crust" class="po-item__detail"/>
+                        <ui:Label text="•        Small" class="po-item__detail"/>
+                        <ui:Label text="•        Marinara" class="po-item__detail"/>
+                        <ui:Label text="•        Cheese" class="po-item__detail"/>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+                <ui:VisualElement class="po-details__total">
+                    <ui:Label text="Order total:" class="po-details__total-label"/>
+                    <ui:Label name="OrderTotal" text="25$" class="po-details__total-value"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- ============ round buttons ============ -->
+            <ui:Button name="CloseButton" class="round-btn modal__close">
+                <ui:VisualElement class="icon-x__bar icon-x__bar--a"/>
+                <ui:VisualElement class="icon-x__bar icon-x__bar--b"/>
+            </ui:Button>
+            <ui:Button name="NextButton" text="→" class="round-btn po-next"/>
+            <ui:Button name="BackButton" text="←" class="round-btn po-back hidden"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

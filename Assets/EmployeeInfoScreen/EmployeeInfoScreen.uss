@@ -1,0 +1,28 @@
+/* EmployeeInfoScreen.uss — "EMPLOYEE INFORMATION" page (mockup slide 32). */
+
+.employee-info {
+    align-items: center;
+    padding-top: 26px;
+}
+
+.employee-info__table {
+    width: 950px;
+    margin-top: 66px;
+}
+
+.employee-info__buttons {
+    flex-direction: row;
+    margin-top: 53px;
+}
+
+.employee-info__reset {
+    margin-left: 52px;
+}
+
+/* this table uses slightly larger text than the shared info table */
+.employee-info__table .info-table__key-text,
+.employee-info__table .cell-input > .unity-base-text-field__input,
+.employee-info__table .cell-input:hover > .unity-base-text-field__input,
+.employee-info__table .cell-input:focus > .unity-base-text-field__input {
+    font-size: 23px;
+}

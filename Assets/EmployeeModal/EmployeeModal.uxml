@@ -1,0 +1,42 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Manager > Employees > "Edit Info" popup (slides 85-89).
+        Value cells are read-only TextFields; clear "readonly" when "Edit Employee" is pressed.
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/EmployeeModal/EmployeeModal.uss"/>
+    <ui:VisualElement name="EmployeeModal" class="modal-overlay">
+        <ui:VisualElement class="modal employee-modal">
+            <ui:Label text="EMPLOYEE" class="modal__title"/>
+
+            <ui:VisualElement class="info-table employee-modal__table">
+                <ui:VisualElement class="info-table__row">
+                    <ui:VisualElement class="info-table__key"><ui:Label text="Name:" class="info-table__key-text"/></ui:VisualElement>
+                    <ui:VisualElement class="info-table__value"><ui:TextField name="NameField" value="Jack Smith" readonly="true" placeholder-text="Name" class="cell-input"/></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="info-table__row">
+                    <ui:VisualElement class="info-table__key"><ui:Label text="Department:" class="info-table__key-text"/></ui:VisualElement>
+                    <ui:VisualElement class="info-table__value"><ui:TextField name="DepartmentField" value="Employee" readonly="true" placeholder-text="Department" class="cell-input"/></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="info-table__row">
+                    <ui:VisualElement class="info-table__key"><ui:Label text="Contacts:" class="info-table__key-text"/></ui:VisualElement>
+                    <ui:VisualElement class="info-table__value">
+                        <ui:TextField name="PhoneField" value="+1 404-234-1278" readonly="true" placeholder-text="Phone" class="cell-input"/>
+                        <ui:TextField name="EmailField" value="employee1@gmail.com" readonly="true" placeholder-text="Email" class="cell-input"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="info-table__row">
+                    <ui:VisualElement class="info-table__key"><ui:Label text="Hire-Date:" class="info-table__key-text"/></ui:VisualElement>
+                    <ui:VisualElement class="info-table__value"><ui:TextField name="HireDateField" value="12-12-2019" readonly="true" placeholder-text="MM-DD-YYYY" class="cell-input"/></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Button name="EditEmployeeButton" text="Edit Employee" class="btn btn--green btn--md employee-modal__edit"/>
+
+            <ui:Button name="CloseButton" class="round-btn modal__close">
+                <ui:VisualElement class="icon-x__bar icon-x__bar--a"/>
+                <ui:VisualElement class="icon-x__bar icon-x__bar--b"/>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

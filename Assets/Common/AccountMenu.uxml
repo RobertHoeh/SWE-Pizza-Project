@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Dropdown opened by the navbar's avatar button (slide 31).
+        Lives on its own layer above the pages so it draws over page content.
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <ui:VisualElement name="AccountMenuLayer" picking-mode="Ignore" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0;">
+        <ui:VisualElement name="AccountMenu" style="position: absolute; top: 75px; right: 15px; width: 204px; height: 105px; background-color: rgb(131, 9, 142); border-radius: 19px; justify-content: space-around; padding: 6px 8px;">
+            <ui:Button name="AccountInfoButton" text="Account Information" class="menu-item"/>
+            <ui:Button name="LogOffButton" text="Log off" class="menu-item"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

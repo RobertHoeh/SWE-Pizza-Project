@@ -1,0 +1,55 @@
+/* SuccessPopup.uss — square purple success panel (mockup slides 13 / 26 / 29). */
+
+.success-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    padding-top: 126px;
+}
+
+.success-popup {
+    width: 691px;
+    height: 424px;
+    background-color: var(--c-purple);
+    border-width: 1px;
+    border-color: var(--c-outline);
+    align-items: center;
+    padding-top: 52px;
+}
+
+.success-popup__check {
+    width: 60px;
+    height: 57px;
+    border-radius: 30px;
+    border-width: 1px;
+    border-color: var(--c-white);
+    align-items: center;
+    justify-content: center;
+}
+
+.success-popup__title {
+    margin-top: 31px;
+    width: 400px;
+    font-size: 30px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    color: var(--c-white);
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.success-popup__message {
+    margin-top: 17px;
+    width: 404px;
+    height: 78px;
+    font-size: 22px;
+    color: var(--c-white);
+    -unity-text-align: upper-center;
+    white-space: normal;
+}
+
+.success-popup > .btn {
+    margin-top: 44px;
+}

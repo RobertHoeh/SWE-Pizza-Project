@@ -1,0 +1,23 @@
+/* EmployeeModal.uss — "EMPLOYEE" popup (mockup slide 85). */
+
+.employee-modal {
+    align-items: center;
+}
+
+.employee-modal__table {
+    width: 950px;
+    margin-top: 150px;
+}
+
+.employee-modal__edit {
+    margin-top: 16px;
+    width: 203px;
+}
+
+/* this table uses slightly larger text than the shared info table */
+.employee-modal__table .info-table__key-text,
+.employee-modal__table .cell-input > .unity-base-text-field__input,
+.employee-modal__table .cell-input:hover > .unity-base-text-field__input,
+.employee-modal__table .cell-input:focus > .unity-base-text-field__input {
+    font-size: 23px;
+}

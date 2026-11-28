@@ -1,5 +1,24 @@
-.custom-label {
-    font-size: 20px;
-    -unity-font-style: bold;
-    color: rgb(68, 138, 255);
+/* LogInScreen.uss — "Sign in to Access Dashboard" card (mockup slide 1). */
+
+.login-card {
+    height: 449px;
+}
+
+.login-card__first-label {
+    margin-top: 41px;
+}
+
+.login-card__label {
+    margin-top: 5px;
+}
+
+.login-card__submit {
+    align-self: center;
+    margin-top: 51px;
+}
+
+.login-card__links {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30px;
 }

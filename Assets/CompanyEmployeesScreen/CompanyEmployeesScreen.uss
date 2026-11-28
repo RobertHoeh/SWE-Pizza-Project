@@ -1,0 +1,32 @@
+/* CompanyEmployeesScreen.uss — employee table (mockup slides 83 / 84). */
+
+.emp-col-id { width: 106px; flex-shrink: 0; }
+.emp-col-name { width: 147px; flex-shrink: 0; }
+.emp-col-dept { width: 168px; flex-shrink: 0; }
+.emp-col-contact { width: 500px; flex-shrink: 0; }
+.emp-col-hire { width: 133px; flex-shrink: 0; }
+.emp-col-actions { flex-grow: 1; min-width: 100px; }
+
+.employees__search {
+    width: 279px;
+    height: 30px;
+}
+
+.employees__search > .unity-base-text-field__input,
+.employees__search:hover > .unity-base-text-field__input,
+.employees__search:focus > .unity-base-text-field__input {
+    border-radius: 0;
+    border-color: #595959;
+    font-size: 25px;
+    padding: 0 10px;
+}
+
+.employees__search .unity-base-text-field__input--placeholder {
+    color: #B4A6BA;
+}
+
+/* default spot: next to the first row's dots, as in slide 84 */
+.employees__row-menu {
+    top: 62px;
+    right: 18px;
+}

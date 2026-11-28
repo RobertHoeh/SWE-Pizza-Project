@@ -1,0 +1,698 @@
+/*
+ * Common.uss
+ * Shared theme + reusable component classes for every screen built from the
+ * "Interface Mockups" deck. Sizes are in px at the 1200px-wide reference
+ * resolution in PanelSettings (1 slide pt ~= 1.667px).
+ */
+
+/* Navbar styles are loaded here too: when a screen is shown through a
+   PanelRenderer, the stylesheet inside NavBar.uxml is not applied. */
+@import url("/Assets/NavBar.uss");
+
+:root {
+    /* ---- palette (taken from the mockup deck) ---- */
+    --c-nav: #DD38F6;            /* navbar background            */
+    --c-purple: #83098E;         /* cards, pills, table headers  */
+    --c-purple-dark: #6A0773;    /* pressed state                */
+    --c-lavender: #9B53B6;       /* inputs, inactive tabs        */
+    --c-green: #00FF00;          /* primary action buttons       */
+    --c-green-dark: #00CC00;
+    --c-red: #FF0000;
+    --c-outline: #158158;        /* thin outline used on inputs / buttons */
+    --c-placeholder: #B7B7B7;    /* placeholder text on purple   */
+    --c-placeholder-light: #A6A6A6; /* placeholder text on white */
+    --c-overlay: rgba(46, 46, 46, 0.5);
+    --c-light: #F3F3F3;
+    --c-row-done: #EEEEEE;
+    --c-text-done: #6B6B6B;
+    --c-white: #FFFFFF;
+    --c-black: #000000;
+
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIAL.TTF");
+    font-size: 20px;
+    color: var(--c-black);
+}
+
+/* ------------------------------------------------------------------ */
+/* Resets for the default runtime theme                               */
+/* ------------------------------------------------------------------ */
+.unity-label {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.row {
+    flex-direction: row;
+}
+
+/* ------------------------------------------------------------------ */
+/* Page layout                                                        */
+/* ------------------------------------------------------------------ */
+/* A screen shown through a nested PanelRenderer sits in a root element that
+   is only as tall as its content; let it fill the window like a UIDocument. */
+PanelRendererRootElement {
+    flex-grow: 1;
+}
+
+.page {
+    flex-grow: 1;
+    background-color: var(--c-white);
+}
+
+.navbar-instance {
+    height: 75px;
+    flex-shrink: 0;
+}
+
+.page__body {
+    flex-grow: 1;
+}
+
+/* Body used by the login / register / password screens: card centred
+   horizontally, 38px under the navbar (as in the mockups). */
+.auth-body {
+    flex-grow: 1;
+    align-items: center;
+    padding-top: 38px;
+}
+
+.page-title {
+    font-size: 30px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+    color: var(--c-black);
+}
+
+/* ------------------------------------------------------------------ */
+/* Purple card (auth screens)                                         */
+/* ------------------------------------------------------------------ */
+.card {
+    width: 683px;
+    background-color: var(--c-purple);
+    border-radius: 28px;
+    padding: 33px 45px 14px 45px;
+}
+
+.card__title {
+    font-size: 25px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    color: var(--c-white);
+    -unity-text-align: middle-center;
+}
+
+.card__text {
+    font-size: 20px;
+    color: var(--c-white);
+    white-space: normal;
+}
+
+.card__label {
+    font-size: 20px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    color: var(--c-white);
+    margin-bottom: 8px;
+}
+
+/* Red error band shown at the top of an auth card. */
+.card-error {
+    position: absolute;
+    top: 11px;
+    left: 44px;
+    right: 44px;
+    height: 51px;
+    background-color: rgba(205, 0, 0, 0.65);
+    padding: 4px 8px;
+    justify-content: center;
+}
+
+.card-error__text {
+    font-size: 20px;
+    color: var(--c-white);
+    white-space: normal;
+}
+
+/* ------------------------------------------------------------------ */
+/* Text inputs                                                        */
+/* ------------------------------------------------------------------ */
+
+/* Lavender input used on the purple cards */
+.input {
+    margin: 0;
+    height: 51px;
+}
+
+.input > .unity-base-text-field__input,
+.input:hover > .unity-base-text-field__input,
+.input:focus > .unity-base-text-field__input {
+    background-color: var(--c-lavender);
+    border-width: 1px;
+    border-color: var(--c-outline);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 25px;
+    color: var(--c-white);
+    -unity-text-align: middle-left;
+}
+
+.input:focus > .unity-base-text-field__input {
+    border-color: var(--c-white);
+}
+
+.input .unity-base-text-field__input--placeholder {
+    color: var(--c-placeholder);
+}
+
+.input--small {
+    height: 40px;
+}
+
+/* Input that sits inside a white table cell and looks like plain text */
+.cell-input {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.cell-input > .unity-base-text-field__input,
+.cell-input:hover > .unity-base-text-field__input,
+.cell-input:focus > .unity-base-text-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    padding: 0;
+    font-size: 20px;
+    color: var(--c-black);
+    -unity-text-align: upper-right;
+    white-space: normal;
+}
+
+.cell-input .unity-base-text-field__input--placeholder {
+    color: var(--c-placeholder-light);
+}
+
+/* Thin rounded outline input (receipt delivery method) */
+.outline-input {
+    margin: 0;
+    width: 175px;
+    height: 22px;
+}
+
+.outline-input > .unity-base-text-field__input,
+.outline-input:hover > .unity-base-text-field__input,
+.outline-input:focus > .unity-base-text-field__input {
+    background-color: var(--c-white);
+    border-width: 1px;
+    border-color: #595959;
+    border-radius: 11px;
+    padding: 0 10px;
+    font-size: 15px;
+    color: var(--c-black);
+}
+
+.outline-input .unity-base-text-field__input--placeholder {
+    color: var(--c-placeholder-light);
+}
+
+/* ------------------------------------------------------------------ */
+/* Buttons                                                            */
+/* ------------------------------------------------------------------ */
+.btn {
+    margin: 0;
+    padding: 0 16px;
+    border-width: 0;
+    border-radius: 20px;
+    color: var(--c-white);
+    font-size: 25px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+}
+
+.btn--outlined {
+    border-width: 1px;
+    border-color: var(--c-outline);
+}
+
+.btn--lg { height: 57px; width: 253px; border-radius: 29px; }
+.btn--md { height: 47px; width: 204px; font-size: 22px; border-radius: 24px; }
+.btn--sm { height: 40px; width: 224px; font-size: 20px; border-radius: 20px; }
+.btn--xs { height: 37px; font-size: 18px; border-radius: 19px; }
+.btn--tiny { height: 24px; font-size: 13px; padding: 0 10px; border-radius: 12px; }
+
+.btn--green,
+.btn--green:hover,
+.btn--green:focus {
+    background-color: var(--c-green);
+}
+.btn--green:active {
+    background-color: var(--c-green-dark);
+}
+
+.btn--purple,
+.btn--purple:hover,
+.btn--purple:focus {
+    background-color: var(--c-purple);
+}
+.btn--purple:active {
+    background-color: var(--c-purple-dark);
+}
+
+.btn--lavender,
+.btn--lavender:hover,
+.btn--lavender:focus {
+    background-color: var(--c-lavender);
+}
+.btn--lavender:active {
+    background-color: var(--c-purple);
+}
+
+.btn--red,
+.btn--red:hover,
+.btn--red:focus {
+    background-color: var(--c-red);
+}
+.btn--red:active {
+    background-color: #CC0000;
+}
+
+/* Text-only link (e.g. "Forgot password?") */
+.link,
+.link:hover,
+.link:focus,
+.link:active {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--c-white);
+    font-size: 18px;
+}
+
+/* Transparent button used for menu entries */
+.menu-item,
+.menu-item:hover,
+.menu-item:focus {
+    margin: 0;
+    padding: 4px 8px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--c-white);
+    font-size: 20px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ------------------------------------------------------------------ */
+/* Icons built from plain elements                                    */
+/* ------------------------------------------------------------------ */
+
+/* White "+" (used in Place Order / New Item / Management Controls) */
+.icon-plus {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+.icon-plus__bar {
+    position: absolute;
+    background-color: var(--c-white);
+}
+.icon-plus__bar--h { left: 8px; right: 8px; top: 24px; height: 12px; }
+.icon-plus__bar--v { top: 8px; bottom: 8px; left: 24px; width: 12px; }
+
+/* Round purple button with a white glyph (close / next / back) */
+.round-btn,
+.round-btn:hover,
+.round-btn:focus {
+    width: 59px;
+    height: 59px;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    border-radius: 30px;
+    background-color: var(--c-purple);
+    color: var(--c-white);
+    font-size: 40px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+}
+.round-btn:active {
+    background-color: var(--c-purple-dark);
+}
+
+/* White "X" drawn with two rotated bars */
+.icon-x__bar {
+    position: absolute;
+    left: 9px;
+    right: 9px;
+    top: 24px;
+    height: 11px;
+    background-color: var(--c-white);
+}
+.icon-x__bar--a { rotate: 45deg; }
+.icon-x__bar--b { rotate: -45deg; }
+
+/* Vertical "more" dots (table action cells) */
+.dots,
+.dots:hover,
+.dots:focus {
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 40px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center;
+    justify-content: center;
+}
+.dots__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background-color: var(--c-black);
+    margin: 1.5px 0;
+}
+
+/* Check mark (L-shape rotated) */
+.icon-check {
+    width: 13px;
+    height: 24px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-color: var(--c-white);
+    rotate: 45deg;
+    margin-bottom: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Floating pill action button (bottom corners of a page)             */
+/* ------------------------------------------------------------------ */
+.fab,
+.fab:hover,
+.fab:focus {
+    position: absolute;
+    bottom: 24px;
+    height: 69px;
+    margin: 0;
+    padding: 0 12px 0 0;
+    border-width: 0;
+    border-radius: 35px;
+    background-color: var(--c-purple);
+    flex-direction: row;
+    align-items: center;
+}
+.fab:active {
+    background-color: var(--c-purple-dark);
+}
+.fab--right { right: 18px; }
+.fab--left { left: 23px; }
+
+.fab__label {
+    color: var(--c-white);
+    font-size: 20px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    white-space: normal;
+}
+
+/* ------------------------------------------------------------------ */
+/* Data tables (orders / employees / menu)                            */
+/* ------------------------------------------------------------------ */
+.table {
+    margin: 13px 0 0 12px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.table__top {
+    background-color: var(--c-purple);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 75px;
+    margin-right: 15px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.table__title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: var(--c-white);
+    font-size: 25px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+}
+
+.table__header {
+    flex-direction: row;
+    background-color: var(--c-purple);
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.table__head-cell {
+    color: var(--c-white);
+    font-size: 22px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    padding: 12px 10px;
+    white-space: normal;
+}
+
+.table__scroll {
+    flex-grow: 1;
+}
+
+.table__row {
+    flex-direction: row;
+    background-color: var(--c-white);
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-color: var(--c-purple);
+    min-height: 70px;
+}
+
+.table__row--done {
+    background-color: var(--c-row-done);
+}
+
+.table__row--done .table__text {
+    color: var(--c-text-done);
+}
+
+.table__cell {
+    border-right-width: 1px;
+    border-color: var(--c-purple);
+    padding: 12px 8px 12px 10px;
+}
+
+.table__cell--center {
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.table__text {
+    font-size: 18px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    color: var(--c-black);
+    white-space: normal;
+}
+
+.table__bullet {
+    font-size: 18px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    color: var(--c-black);
+    padding-left: 30px;
+}
+
+/* Small lavender popup shown next to a row's "more" dots */
+.row-menu {
+    position: absolute;
+    width: 118px;
+    background-color: var(--c-lavender);
+    border-radius: 10px;
+    padding: 4px 2px;
+}
+.row-menu__item,
+.row-menu__item:hover,
+.row-menu__item:focus {
+    margin: 0;
+    padding: 2px 4px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--c-white);
+    font-size: 20px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+.row-menu__item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ------------------------------------------------------------------ */
+/* Key / value info table (black lines, used on white backgrounds)    */
+/* ------------------------------------------------------------------ */
+.info-table {
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-color: #404040;
+}
+
+.info-table__row {
+    flex-direction: row;
+    min-height: 50px;
+    border-bottom-width: 1px;
+    border-color: #404040;
+}
+
+.info-table__key,
+.info-table__value {
+    flex-basis: 0;
+    flex-grow: 1;
+    border-right-width: 1px;
+    border-color: #404040;
+    padding: 12px 10px;
+}
+
+.info-table__key-text {
+    font-size: 20px;
+    color: var(--c-black);
+}
+
+.info-table__value {
+    align-items: stretch;
+}
+
+.info-table__value-text {
+    font-size: 20px;
+    color: var(--c-black);
+    -unity-text-align: upper-right;
+    white-space: normal;
+}
+
+.info-table__placeholder {
+    color: var(--c-placeholder-light);
+}
+
+/* ------------------------------------------------------------------ */
+/* Modal (white rounded panel over a dimmed screen)                   */
+/* ------------------------------------------------------------------ */
+.modal-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--c-overlay);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    width: 1078px;
+    height: 583px;
+    background-color: var(--c-white);
+    border-radius: 30px;
+}
+
+.modal__close {
+    position: absolute;
+    top: 8px;
+    right: 11px;
+}
+
+.modal__title {
+    margin-top: 28px;
+    font-size: 30px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+    -unity-text-align: middle-center;
+    color: var(--c-black);
+}
+
+/* ------------------------------------------------------------------ */
+/* Check boxes & radio buttons                                        */
+/* ------------------------------------------------------------------ */
+.choice {
+    margin: 0;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Without flex-grow the toggle's input container collapses to 0px wide and
+   hides both the box and its text. */
+.choice .unity-toggle__input,
+.choice .unity-radio-button__input {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.choice .unity-toggle__text,
+.choice .unity-radio-button__text {
+    flex-shrink: 0;
+}
+
+.choice .unity-toggle__checkmark,
+.choice .unity-radio-button__checkmark-background {
+    width: 14px;
+    height: 14px;
+    background-color: var(--c-light);
+    border-width: 1px;
+    border-color: var(--c-black);
+}
+
+.choice .unity-radio-button__checkmark-background {
+    border-radius: 7px;
+    background-image: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice .unity-radio-button__checkmark {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    width: 6px;
+    height: 6px;
+}
+
+.choice:checked .unity-radio-button__checkmark,
+.choice .unity-radio-button__input:checked .unity-radio-button__checkmark {
+    background-color: var(--c-black);
+}
+
+/* Pink filled check box (receipt delivery method) */
+.choice--pink:checked .unity-toggle__checkmark,
+.choice--pink .unity-toggle__input:checked .unity-toggle__checkmark {
+    background-image: none;
+    background-color: var(--c-nav);
+}
+
+.choice .unity-label {
+    margin-left: 6px;
+    font-size: 17px;
+    color: var(--c-black);
+    min-width: 0;
+}
+
+/* GroupBox is only used to scope radio-button groups */
+.radio-group {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}

@@ -1,0 +1,21 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/RegisterCodeScreen/RegisterCodeScreen.uss"/>
+    <ui:VisualElement name="RegisterCodeScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="auth-body">
+            <ui:VisualElement class="card code-card">
+                <ui:Label text="Create an Account" class="card__title"/>
+                <ui:Label text="Enter in the 7-digit code sent by your manager to continue to Account Setup" class="card__text code-card__text"/>
+                <ui:TextField name="CodeField" max-length="7" placeholder-text="Enter Code…" hide-placeholder-on-focus="true" class="input input--small code-card__input"/>
+                <ui:Button name="GoToRegistrationButton" text="Go to Registration" class="btn btn--green btn--outlined btn--sm code-card__submit"/>
+
+                <!-- e.g. "Code field is not filled in..." / "You have entered an incorrect code..." -->
+                <ui:VisualElement name="ErrorBanner" class="card-error code-card__error hidden">
+                    <ui:Label name="ErrorText" text="&lt;b&gt;Error&lt;/b&gt;: You have entered an incorrect code. Try again or contact manager for help" class="card-error__text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

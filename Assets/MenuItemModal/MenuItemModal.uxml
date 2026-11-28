@@ -1,0 +1,53 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        One popup for both "ADD NEW ITEM" (slides 97-103) and "EDIT ITEM" (slides 106-108).
+          Add:  ModalTitle = "ADD NEW ITEM", SubmitButton = "Create new item"
+          Edit: ModalTitle = "EDIT ITEM",    SubmitButton = "Modify item"
+        When an image is set on "ItemImage", hide "DropHint" and show "RemoveImageButton".
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/MenuItemModal/MenuItemModal.uss"/>
+    <ui:VisualElement name="MenuItemModal" class="modal-overlay">
+        <ui:VisualElement class="modal">
+            <ui:Label name="ModalTitle" text="ADD NEW ITEM" class="modal__title"/>
+
+            <ui:VisualElement class="item-modal__content">
+                <ui:VisualElement class="item-table">
+                    <ui:VisualElement class="item-table__row item-table__row--short">
+                        <ui:Label text="Item Name" class="item-table__key"/>
+                        <ui:VisualElement class="item-table__value"><ui:TextField name="ItemNameField" placeholder-text="Name of item" class="cell-input item-table__input"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="item-table__row item-table__row--short">
+                        <ui:Label text="Item Type" class="item-table__key"/>
+                        <ui:VisualElement class="item-table__value"><ui:TextField name="ItemTypeField" placeholder-text="Type of item" class="cell-input item-table__input"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="item-table__row">
+                        <ui:Label text="Sizes" class="item-table__key"/>
+                        <ui:VisualElement class="item-table__value"><ui:TextField name="SizesField" multiline="true" placeholder-text="Sizes are comma separated&#10;Leave empty if N/A" class="cell-input item-table__input"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="item-table__row">
+                        <ui:Label text="Cost" class="item-table__key"/>
+                        <ui:VisualElement class="item-table__value"><ui:TextField name="CostField" multiline="true" placeholder-text="0.00$&#10;Prices are comma-separated" class="cell-input item-table__input"/></ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="item-modal__image-column">
+                    <ui:VisualElement name="ImageDropZone" class="item-modal__image-box">
+                        <ui:VisualElement name="ItemImage" class="item-modal__image"/>
+                        <ui:Label name="DropHint" text="Drop your image here" class="item-modal__drop-hint"/>
+                    </ui:VisualElement>
+                    <ui:Button name="RemoveImageButton" text="Remove image" class="btn btn--red item-modal__remove hidden"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="item-modal__submit-row">
+                <ui:Button name="SubmitButton" text="Create new item" class="btn btn--green item-modal__submit"/>
+            </ui:VisualElement>
+
+            <ui:Button name="CloseButton" class="round-btn modal__close">
+                <ui:VisualElement class="icon-x__bar icon-x__bar--a"/>
+                <ui:VisualElement class="icon-x__bar icon-x__bar--b"/>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

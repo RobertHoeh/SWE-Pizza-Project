@@ -1,0 +1,22 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        One popup used for every "success" message in the mockups:
+          - REGISTER SUCCESS!              -> "Go to Sign In"   (slide 13)
+          - PASSWORD SUCCESSFULLY CHANGED! -> "Go to Sign In"   (slide 26)
+          - LOGIN SUCCESSFUL               -> "Go to Dashboard" (slide 29)
+        Set SuccessTitle / SuccessMessage / SuccessButton text from code.
+        Meant to sit on a layer above the current page (no dimming in the mockups).
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/Common/SuccessPopup.uss"/>
+    <ui:VisualElement name="SuccessPopup" class="success-layer">
+        <ui:VisualElement class="success-popup">
+            <ui:VisualElement class="success-popup__check">
+                <ui:VisualElement class="icon-check"/>
+            </ui:VisualElement>
+            <ui:Label name="SuccessTitle" text="REGISTER SUCCESS!" class="success-popup__title"/>
+            <ui:Label name="SuccessMessage" text="Congratulations, your account has been successfully created. You may now sign in to your account." class="success-popup__message"/>
+            <ui:Button name="SuccessButton" text="Go to Sign In" class="btn btn--green btn--outlined btn--lg"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

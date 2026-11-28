@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Error / success banner that appears just under the navbar (slides 34, 36, 38, 41, 89, 99, 103...).
+        For the success variant, swap the error modifier class for the success one (see Toast.uss) and un-hide UndoButton.
+        The full-screen layer ignores clicks so the page underneath stays usable.
+    -->
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/Common/Toast.uss"/>
+    <ui:VisualElement name="ToastLayer" picking-mode="Ignore" class="toast-layer">
+        <ui:VisualElement name="Toast" class="toast toast--error">
+            <ui:Label name="ToastText" text="&lt;b&gt;Error&lt;/b&gt;: One or more fields is not filled out" class="toast__text"/>
+            <ui:Button name="UndoButton" text="Undo" class="toast__undo hidden"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

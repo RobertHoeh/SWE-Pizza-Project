@@ -1,0 +1,109 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Order dashboard (slides 30 / 77 for employees, 81 / 82 for managers).
+        Employees: hide "ManagementControlsButton" (add the "hidden" class).
+        The rows inside "OrderRows" are sample data matching the mockup; generate them from code.
+    -->
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/OrderDashboardScreen/OrderDashboardScreen.uss"/>
+    <ui:VisualElement name="OrderDashboardScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="page__body">
+            <ui:VisualElement class="table">
+                <ui:VisualElement class="table__header">
+                    <ui:Label text="Order #" class="table__head-cell order-col-id"/>
+                    <ui:Label text="Name" class="table__head-cell order-col-name"/>
+                    <ui:Label text="Timestamp" class="table__head-cell order-col-time"/>
+                    <ui:Label text="Order Contents" class="table__head-cell order-col-contents"/>
+                    <ui:Label text="Wait Time" class="table__head-cell order-col-wait"/>
+                    <ui:Label text="Status" class="table__head-cell order-col-status"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="OrderRows" vertical-scroller-visibility="AlwaysVisible" horizontal-scroller-visibility="Hidden" class="table__scroll">
+                    <!-- sample row -->
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell order-col-id"><ui:Label text="2" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-name"><ui:Label text="Richard" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-time"><ui:Label text="8:30AM&#10;3/12/2026" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-contents">
+                            <ui:Label text="Cheese Pizza x1" class="table__text"/>
+                            <ui:Label text="•    Small Size" class="table__bullet"/>
+                            <ui:Label text="•    Olives" class="table__bullet"/>
+                            <ui:Label text="•    Jalapeno" class="table__bullet"/>
+                            <ui:Label text="Coke x3" class="table__text"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-wait"><ui:Label text="13 min" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-status"><ui:Label text="In-Transit" class="table__text"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <!-- sample row -->
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell order-col-id"><ui:Label text="3" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-name"><ui:Label text="John" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-time"><ui:Label text="8:32AM&#10;3/12/2026" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-contents">
+                            <ui:Label text="Pepperoni Pizza x1" class="table__text"/>
+                            <ui:Label text="•    Small Size" class="table__bullet"/>
+                            <ui:Label text="•    Beef" class="table__bullet"/>
+                            <ui:Label text="•    Extra Cheese" class="table__bullet"/>
+                            <ui:Label text="Breadsticks x2" class="table__text"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-wait"><ui:Label text="18 min" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-status"><ui:Label text="Preparing" class="table__text"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <!-- sample row -->
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell order-col-id"><ui:Label text="4" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-name"><ui:Label text="John Something" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-time"><ui:Label text="8:15AM&#10;3/12/2026" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-contents">
+                            <ui:Label text="Cheese Pizza x1" class="table__text"/>
+                            <ui:Label text="•    Medium Size" class="table__bullet"/>
+                            <ui:Label text="•    Olives" class="table__bullet"/>
+                            <ui:Label text="•    Pineapple" class="table__bullet"/>
+                            <ui:Label text="•    Beef" class="table__bullet"/>
+                            <ui:Label text="Custom Pizza x1" class="table__text"/>
+                            <ui:Label text="•    Thin Crust" class="table__bullet"/>
+                            <ui:Label text="•    Small" class="table__bullet"/>
+                            <ui:Label text="•    Marinara" class="table__bullet"/>
+                            <ui:Label text="•    Cheese" class="table__bullet"/>
+                            <ui:Label text="Sprite x1" class="table__text"/>
+                            <ui:Label text="Vegan Salad x1" class="table__text"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-wait"><ui:Label text="30 min" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-status"><ui:Label text="Preparing" class="table__text"/></ui:VisualElement>
+                    </ui:VisualElement>
+                    <!-- sample delivered row (greyed out) -->
+                    <ui:VisualElement class="table__row table__row--done">
+                        <ui:VisualElement class="table__cell order-col-id"><ui:Label text="1" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-name"><ui:Label text="Albert" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-time"><ui:Label text="8:15AM" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-contents"><ui:Label text="Cheese Pizza x1" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-wait"><ui:Label text="10 min" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell order-col-status"><ui:Label text="Delivered" class="table__text"/></ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+            <!-- Manager only -->
+            <ui:Button name="ManagementControlsButton" class="fab fab--left">
+                <ui:VisualElement class="icon-plus">
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--h"/>
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--v"/>
+                </ui:VisualElement>
+                <ui:Label text="Management Controls" class="fab__label dashboard__mgmt-label"/>
+            </ui:Button>
+            <ui:VisualElement name="ManagementMenu" class="dashboard__mgmt-menu hidden">
+                <ui:Button name="EmployeesButton" text="Employees" class="menu-item"/>
+                <ui:Button name="MenuItemsButton" text="Menu Items" class="menu-item"/>
+            </ui:VisualElement>
+
+            <ui:Button name="PlaceOrderButton" class="fab fab--right">
+                <ui:VisualElement class="icon-plus">
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--h"/>
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--v"/>
+                </ui:VisualElement>
+                <ui:Label text="Place Order" class="fab__label"/>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

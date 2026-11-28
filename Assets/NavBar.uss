@@ -1,0 +1,59 @@
+/* NavBar.uss — top bar from the mockups (75px tall at 1200px reference width). */
+
+.navbar {
+    /* fixed height so it stays a top bar even as its own document */
+    height: 75px;
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: center;
+    background-color: #DD38F6;
+    padding: 9px 11px 9px 12px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIAL.TTF");
+}
+
+.navbar__spacer {
+    flex-grow: 1;
+}
+
+.navbar__pill {
+    flex-direction: row;
+    align-items: center;
+    height: 57px;
+    border-radius: 29px;
+    background-color: #83098E;
+    padding: 0 12px 0 14px;
+}
+
+.navbar__btn,
+.navbar__btn:hover,
+.navbar__btn:focus,
+.navbar__btn:active {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.navbar__logo {
+    width: 60px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.navbar__dashboard {
+    margin-left: 16px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+}
+
+.navbar__user {
+    -unity-text-align: middle-right;
+    margin-right: 12px;
+    min-width: 60px;
+}
+
+.navbar__avatar {
+    width: 51px;
+    height: 51px;
+}

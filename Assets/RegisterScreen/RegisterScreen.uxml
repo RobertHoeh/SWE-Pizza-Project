@@ -1,0 +1,26 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/RegisterScreen/RegisterScreen.uss"/>
+    <ui:VisualElement name="RegisterScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="auth-body">
+            <ui:VisualElement class="card register-card">
+                <ui:Label text="Create an Account" class="card__title"/>
+                <ui:VisualElement class="register-card__fields">
+                    <ui:TextField name="UsernameField" placeholder-text="Username" hide-placeholder-on-focus="true" class="input input--small register-card__input"/>
+                    <ui:TextField name="EmailField" placeholder-text="Email Address" hide-placeholder-on-focus="true" class="input input--small register-card__input"/>
+                    <ui:TextField name="PasswordField" password="true" placeholder-text="Password" hide-placeholder-on-focus="true" class="input input--small register-card__input"/>
+                    <ui:TextField name="FullNameField" placeholder-text="Full Name" hide-placeholder-on-focus="true" class="input input--small register-card__input"/>
+                    <ui:TextField name="PhoneField" placeholder-text="Phone Number" hide-placeholder-on-focus="true" class="input input--small register-card__input"/>
+                </ui:VisualElement>
+                <ui:Button name="RegisterButton" text="Register" class="btn btn--green btn--outlined btn--sm register-card__submit"/>
+
+                <!-- e.g. "One or more fields are not filled in..." / password rules -->
+                <ui:VisualElement name="ErrorBanner" class="card-error hidden">
+                    <ui:Label name="ErrorText" text="&lt;b&gt;Error&lt;/b&gt;: One or more fields are not filled in. Ensure all fields are filled before registering" class="card-error__text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

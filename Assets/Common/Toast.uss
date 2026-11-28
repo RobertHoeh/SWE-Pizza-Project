@@ -1,0 +1,54 @@
+/* Toast.uss — translucent error / success banner under the navbar. */
+
+.toast-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    padding-top: 53px;
+}
+
+.toast {
+    width: 593px;
+    min-height: 51px;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 12px;
+}
+
+.toast--error {
+    background-color: rgba(205, 0, 0, 0.65);
+}
+
+.toast--success {
+    background-color: rgba(125, 176, 100, 0.65);
+}
+
+.toast__text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    font-size: 20px;
+    color: var(--c-white);
+    white-space: normal;
+}
+
+.toast__undo,
+.toast__undo:hover,
+.toast__undo:focus {
+    margin: 0 0 0 8px;
+    padding: 0;
+    width: 94px;
+    height: 29px;
+    border-width: 1px;
+    border-color: var(--c-black);
+    border-radius: 15px;
+    background-color: rgba(152, 218, 119, 0.5);
+    color: var(--c-white);
+    font-size: 20px;
+    -unity-font-definition: url("/Assets/arial-cufonfonts/ARIALBD.TTF");
+}
+.toast__undo:active {
+    background-color: rgba(152, 218, 119, 0.8);
+}

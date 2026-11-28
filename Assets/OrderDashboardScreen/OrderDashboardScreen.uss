@@ -1,0 +1,36 @@
+/* OrderDashboardScreen.uss — order table + floating buttons (mockup slides 30, 77, 81, 82). */
+
+/* column widths (px at 1200 reference width) */
+.order-col-id { width: 109px; flex-shrink: 0; }
+.order-col-name { width: 245px; flex-shrink: 0; }
+.order-col-time { width: 155px; flex-shrink: 0; }
+.order-col-contents { width: 386px; flex-shrink: 0; }
+.order-col-wait { width: 133px; flex-shrink: 0; }
+.order-col-status { flex-grow: 1; min-width: 130px; }
+
+/* the header row in the mockup is a little taller to fit "Wait / Time" */
+.table__header .table__head-cell {
+    min-height: 81px;
+}
+
+.table__row {
+    min-height: 91px;
+}
+
+.dashboard__mgmt-label {
+    width: 132px;
+    font-size: 19px;
+}
+
+/* Popup above the "Management Controls" button (slide 82) */
+.dashboard__mgmt-menu {
+    position: absolute;
+    left: 16px;
+    bottom: 109px;
+    width: 204px;
+    height: 115px;
+    background-color: var(--c-purple);
+    border-radius: 23px;
+    justify-content: space-around;
+    padding: 6px 0;
+}

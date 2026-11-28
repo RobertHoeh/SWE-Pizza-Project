@@ -1,7 +1,31 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="NavBar" src="project://database/Assets/NavBar.uxml?fileID=9197481963319205126&amp;guid=c81377c752c70b24382a7fadb87e21a1&amp;type=3#NavBar"/>
-    <Style src="project://database/Assets/LogInScreen/LogInScreen.uss?fileID=7433441132597879392&amp;guid=a6ec7aeb908981a46880397a08510c20&amp;type=3#LogInScreen"/>
-    <ui:Instance template="NavBar" style="height: 40px; background-color: rgb(221, 56, 246);"/>
-    <ui:Label text="Hello World! From UXML"/>
-    <ui:Label text="Hello World! With Style" class="custom-label"/>
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/LogInScreen/LogInScreen.uss"/>
+    <ui:VisualElement name="LogInScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="auth-body">
+            <ui:VisualElement class="card login-card">
+                <ui:Label text="Sign in to Access Dashboard" class="card__title"/>
+
+                <ui:Label text="Your username" class="card__label login-card__first-label"/>
+                <ui:TextField name="UsernameField" placeholder-text="Username" hide-placeholder-on-focus="true" class="input"/>
+
+                <ui:Label text="Your password" class="card__label login-card__label"/>
+                <ui:TextField name="PasswordField" password="true" placeholder-text="Password" hide-placeholder-on-focus="true" class="input"/>
+
+                <ui:Button name="SignInButton" text="Sign in" class="btn btn--green btn--outlined btn--lg login-card__submit"/>
+
+                <ui:VisualElement class="login-card__links">
+                    <ui:Button name="CreateAccountLink" text="&lt;u&gt;Don’t have an account?&lt;/u&gt;" class="link"/>
+                    <ui:Button name="ForgotPasswordLink" text="&lt;u&gt;Forgot password?&lt;/u&gt;" class="link"/>
+                </ui:VisualElement>
+
+                <!-- Shown on failed sign in, e.g. "Password or username missing" -->
+                <ui:VisualElement name="ErrorBanner" class="card-error hidden">
+                    <ui:Label name="ErrorText" text="&lt;b&gt;Error&lt;/b&gt;: Password or username missing" class="card-error__text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>

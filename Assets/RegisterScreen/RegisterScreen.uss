@@ -1,0 +1,20 @@
+/* RegisterScreen.uss — "Create an Account" form card (mockup slide 7). */
+
+.register-card {
+    height: 449px;
+    padding: 15px 45px 14px 45px;
+    align-items: center;
+}
+
+.register-card__fields {
+    margin-top: 23px;
+    width: 499px;
+}
+
+.register-card__input {
+    margin-bottom: 17px;
+}
+
+.register-card__submit {
+    margin-top: 16px;
+}

@@ -1,0 +1,24 @@
+/* ManageMenuScreen.uss — menu item table (mockup slides 96 / 105). */
+
+.menu-col-id { width: 106px; flex-shrink: 0; }
+.menu-col-name { width: 146px; flex-shrink: 0; }
+.menu-col-type { width: 170px; flex-shrink: 0; }
+.menu-col-sizes { width: 373px; flex-shrink: 0; }
+.menu-col-cost { width: 261px; flex-shrink: 0; }
+.menu-col-actions { flex-grow: 1; min-width: 100px; }
+
+/* leave room for the floating "New Item" button */
+.menu-table {
+    margin-bottom: 110px;
+    flex-grow: 0;
+}
+
+.menu__new-item {
+    width: 181px;
+}
+
+/* default spot: next to the first row's dots, as in slide 105 */
+.menu__row-menu {
+    top: 90px;
+    right: 18px;
+}

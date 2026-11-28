@@ -1,0 +1,83 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Manager > Menu Items (slides 96, 104, 105, 109-111).
+        Rows inside "MenuRows" are sample data; "RowActionMenu" is positioned from code.
+    -->
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/ManageMenuScreen/ManageMenuScreen.uss"/>
+    <ui:VisualElement name="ManageMenuScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="page__body">
+            <ui:VisualElement class="table menu-table">
+                <ui:VisualElement class="table__top">
+                    <ui:Label text="Manage Menu" class="table__title"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="table__header">
+                    <ui:Label text="ID" class="table__head-cell menu-col-id"/>
+                    <ui:Label text="Name" class="table__head-cell menu-col-name"/>
+                    <ui:Label text="Type" class="table__head-cell menu-col-type"/>
+                    <ui:Label text="Sizes" class="table__head-cell menu-col-sizes"/>
+                    <ui:Label text="Cost" class="table__head-cell menu-col-cost"/>
+                    <ui:Label text="Actions" class="table__head-cell menu-col-actions"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="MenuRows" vertical-scroller-visibility="AlwaysVisible" horizontal-scroller-visibility="Hidden" class="table__scroll">
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell menu-col-id"><ui:Label text="1" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-name"><ui:Label text="Cheese Pizza" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-type"><ui:Label text="Pizza" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-sizes"><ui:Label text="Small, Medium, Large, Extra Large" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-cost"><ui:Label text="$7, $9, $11, $12" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center menu-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell menu-col-id"><ui:Label text="2" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-name"><ui:Label text="Pepperoni Pizza" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-type"><ui:Label text="Pizza" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-sizes"><ui:Label text="Small, Medium, Large, Extra Large" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-cost"><ui:Label text="$7, $9, $11, $12" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center menu-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell menu-col-id"><ui:Label text="3" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-name"><ui:Label text="French Fries" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-type"><ui:Label text="Side" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-sizes"><ui:Label text="N/A" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-cost"><ui:Label text="$3" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center menu-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell menu-col-id"><ui:Label text="4" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-name"><ui:Label text="Coke" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-type"><ui:Label text="Drink" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-sizes"><ui:Label text="N/A" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell menu-col-cost"><ui:Label text="$2" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center menu-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+            <!-- Row "..." popup (slide 105) -->
+            <ui:VisualElement name="RowActionMenu" class="row-menu menu__row-menu hidden">
+                <ui:Button name="DeleteItemButton" text="Delete Item" class="row-menu__item"/>
+                <ui:Button name="EditItemButton" text="Edit Item" class="row-menu__item"/>
+            </ui:VisualElement>
+
+            <ui:Button name="NewItemButton" class="fab fab--right menu__new-item">
+                <ui:VisualElement class="icon-plus">
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--h"/>
+                    <ui:VisualElement class="icon-plus__bar icon-plus__bar--v"/>
+                </ui:VisualElement>
+                <ui:Label text="New Item" class="fab__label"/>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

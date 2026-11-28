@@ -1,0 +1,77 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <!--
+        Manager > Employees (slides 83, 84, 90-93).
+        Rows inside "EmployeeRows" are sample data; "RowActionMenu" is positioned next to the
+        clicked row's dots from code.
+    -->
+    <ui:Template name="NavBar" src="/Assets/NavBar.uxml"/>
+    <Style src="/Assets/Common/Common.uss"/>
+    <Style src="/Assets/CompanyEmployeesScreen/CompanyEmployeesScreen.uss"/>
+    <ui:VisualElement name="CompanyEmployeesScreen" class="page">
+        <ui:Instance template="NavBar" name="NavBar" class="navbar-instance"/>
+        <ui:VisualElement class="page__body">
+            <ui:VisualElement class="table">
+                <ui:VisualElement class="table__top">
+                    <ui:Label text="Company Employees" class="table__title"/>
+                    <ui:TextField name="SearchField" placeholder-text="Search Employee" hide-placeholder-on-focus="true" class="input employees__search"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="table__header">
+                    <ui:Label text="ID" class="table__head-cell emp-col-id"/>
+                    <ui:Label text="Name" class="table__head-cell emp-col-name"/>
+                    <ui:Label text="Department" class="table__head-cell emp-col-dept"/>
+                    <ui:Label text="Contact" class="table__head-cell emp-col-contact"/>
+                    <ui:Label text="Hire Date" class="table__head-cell emp-col-hire"/>
+                    <ui:Label text="Actions" class="table__head-cell emp-col-actions"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="EmployeeRows" vertical-scroller-visibility="AlwaysVisible" horizontal-scroller-visibility="Hidden" class="table__scroll">
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell emp-col-id"><ui:Label text="1" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-name"><ui:Label text="Jack Smith" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-dept"><ui:Label text="Employee" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-contact"><ui:Label text="+1 404-234-1278&#10;employee1@gmail.com" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-hire"><ui:Label text="12-12-2019" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center emp-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell emp-col-id"><ui:Label text="2" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-name"><ui:Label text="Shaun Hawks" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-dept"><ui:Label text="Employee" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-contact"><ui:Label text="+1 404-846-1236&#10;employee2@gmail.com" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-hire"><ui:Label text="04-03-2020" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center emp-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell emp-col-id"><ui:Label text="3" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-name"><ui:Label text="John Hopkin" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-dept"><ui:Label text="Employee" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-contact"><ui:Label text="+1 404-945-4854&#10;employee3@gmail.com" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-hire"><ui:Label text="04-10-2020" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center emp-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="table__row">
+                        <ui:VisualElement class="table__cell emp-col-id"><ui:Label text="4" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-name"><ui:Label text="Jane Doe" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-dept"><ui:Label text="Employee" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-contact"><ui:Label text="+1 404-843-1053&#10;employee4@gmail.com" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell emp-col-hire"><ui:Label text="06-12-2020" class="table__text"/></ui:VisualElement>
+                        <ui:VisualElement class="table__cell table__cell--center emp-col-actions">
+                            <ui:Button class="dots"><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/><ui:VisualElement class="dots__dot"/></ui:Button>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+            <!-- Row "..." popup (slide 84) -->
+            <ui:VisualElement name="RowActionMenu" class="row-menu employees__row-menu hidden">
+                <ui:Button name="DeleteEmployeeButton" text="Delete Employee" class="row-menu__item"/>
+                <ui:Button name="EditEmployeeButton" text="Edit Info" class="row-menu__item"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
